@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: kos-services
+  datasource:
+    url: jdbc:h2:mem:kosmos
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  security:
+    user:
+      name: kosmos
+      password: "${KOS_ADMIN_PASSWORD:changeme}"
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
