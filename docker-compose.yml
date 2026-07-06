@@ -13,13 +13,14 @@ services:
   kos-services:
     build: .
     ports:
-      - "8080:8080"
+      - "8085:8085"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/kos
       SPRING_DATASOURCE_USERNAME: kos
       SPRING_DATASOURCE_PASSWORD: kos
       KOS_ADMIN_PASSWORD: "${KOS_ADMIN_PASSWORD:-changeme}"
       KOS_CORS_ORIGINS: "${KOS_CORS_ORIGINS:-http://localhost:5173}"
+      SERVER_PORT: "8085"
     depends_on:
       - db
 
