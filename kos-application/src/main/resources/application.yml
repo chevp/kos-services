@@ -2,12 +2,17 @@ spring:
   application:
     name: kos-services
   datasource:
-    url: jdbc:h2:mem:kosmos
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5435/kos
+    username: kos
+    password: "${KOS_DB_PASSWORD:kos}"
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
+    open-in-view: false
     show-sql: false
+  flyway:
+    locations: classpath:db/migration
   security:
     user:
       name: kosmos
@@ -15,6 +20,10 @@ spring:
 
 server:
   port: 8080
+
+kos:
+  cors:
+    allowed-origins: "${KOS_CORS_ORIGINS:http://localhost:5173}"
 
 management:
   endpoints:

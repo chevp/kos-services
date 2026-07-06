@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: kos
+      POSTGRES_USER: kos
+      POSTGRES_PASSWORD: kos
+    ports:
+      - "5435:5432"
+    volumes:
+      - kos-pgdata:/var/lib/postgresql/data
+
+  kos-services:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/kos
+      SPRING_DATASOURCE_USERNAME: kos
+      SPRING_DATASOURCE_PASSWORD: kos
+      KOS_ADMIN_PASSWORD: "${KOS_ADMIN_PASSWORD:-changeme}"
+      KOS_CORS_ORIGINS: "${KOS_CORS_ORIGINS:-http://localhost:5173}"
+    depends_on:
+      - db
+
+volumes:
+  kos-pgdata:
