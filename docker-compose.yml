@@ -1,5 +1,7 @@
 services:
-  db:
+  # Named kos-db (not "db") so this file can be `include`d into the root
+  # kosmos compose without colliding with kaga's own "db" service.
+  kos-db:
     image: postgres:16-alpine
     environment:
       POSTGRES_DB: kos
@@ -15,14 +17,14 @@ services:
     ports:
       - "8085:8085"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/kos
+      SPRING_DATASOURCE_URL: jdbc:postgresql://kos-db:5432/kos
       SPRING_DATASOURCE_USERNAME: kos
       SPRING_DATASOURCE_PASSWORD: kos
       KOS_ADMIN_PASSWORD: "${KOS_ADMIN_PASSWORD:-changeme}"
       KOS_CORS_ORIGINS: "${KOS_CORS_ORIGINS:-http://localhost:5173}"
       SERVER_PORT: "8085"
     depends_on:
-      - db
+      - kos-db
 
 volumes:
   kos-pgdata:

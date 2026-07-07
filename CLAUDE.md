@@ -13,7 +13,7 @@ Every project points to a game-specific runtime (e.g. nuna-services) via `servic
 
 ```bash
 # 1. Start PostgreSQL only (from this directory)
-docker compose up db -d
+docker compose up kos-db -d
 
 # 2. Run the service (MUST be run from kos-application submodule)
 cd kos-application && mvn spring-boot:run
@@ -37,7 +37,7 @@ Auth: HTTP Basic — user `kosmos`, password from `KOS_ADMIN_PASSWORD` (default:
 | POST | `/api/projects/{id}/activate` | status → ACTIVE |
 | POST | `/api/projects/{id}/archive` | status → ARCHIVED |
 | GET | `/api/projects/{id}/health` | proxy → serviceEndpoint/api/status |
-| GET | `/api/status` | service health |
+| GET | `/api/status` | service health (public, no auth) |
 
 ## DB migrations
 
