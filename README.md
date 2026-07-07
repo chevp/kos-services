@@ -8,7 +8,7 @@ Kosmos backend infrastructure — Java 21 / Spring Boot 3 service layer.
 mvn spring-boot:run
 ```
 
-API available at `http://localhost:8080/api/status`.
+API available at `http://localhost:8085/api/status`.
 
 ## Stack
 
